@@ -109,15 +109,13 @@
             pageShow: 5,
             page: 1,
             limit: 1,
-            from: 1,
-            to: 1,
         }, options );
  
         return this.each( function() {
             var $totalPage = Math.ceil(settings.size / settings.limit);
         	var $toFirstTime = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
         	$(this).drawPage({
-        		from: settings.from,
+        		from: 1,
         		to: $toFirstTime,
         	});
         	$(this).children('ul').children('li').eq(settings.from).addClass('active').siblings().removeClass('active');
