@@ -1,5 +1,6 @@
 # pagination-jquery-plugin
 New and Simple Pagination Jquery Plugin for You.
+<img src="https://github.com/jounger/pagination-jquery-plugin/blob/master/preview-img.PNG" />
 
 ```
 	$('#page').Pagination({ // id to initial draw and use pagination
