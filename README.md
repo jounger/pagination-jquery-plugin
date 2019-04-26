@@ -5,10 +5,10 @@ New and Simple Pagination Jquery Plugin for You.
 
 ```
 	$('#page').Pagination({ // id to initial draw and use pagination
-            size: 87, // size of list input
-            pageShow: 5, // 5 page-item per page
+            size: 87, // total size of list input (required)
+            pageShow: 5, // 5 page-item per page (required)
             page: 1, // current page (default)
-            limit: 10, // current limit show perpage (default)
+            limit: 10, // current limit record show on table per page (default)
     	}, function(obj){ // callback function, you can use it to re-draw table or something
             	$('#info').html('Current page: ' + obj.page);
     	});
