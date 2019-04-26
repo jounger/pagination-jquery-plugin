@@ -112,13 +112,15 @@
         }, options );
  
         return this.each( function() {
+			// first time initial page
             var $totalPage = Math.ceil(settings.size / settings.limit);
         	var $toFirstTime = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
         	$(this).drawPage({
         		from: 1,
         		to: $toFirstTime,
         	});
-        	$(this).children('ul').children('li').eq(settings.from).addClass('active').siblings().removeClass('active');
+			$(this).find('ul > li').eq(1).addClass('active');
+			callback.call(this, {page : 1});
             $(this).pageChanging({
 	            size: settings.size,
 	            pageShow: settings.pageShow,
