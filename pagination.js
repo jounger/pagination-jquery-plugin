@@ -35,7 +35,8 @@
 					var $index = parseInt($($thisChildren.filter('.active').html()).attr('data-index'));
 					var $firstPositon = parseInt($($thisChildren.eq(1).html()).html());
 					var $lastPositon = parseInt($($thisChildren.eq($thisChildren.length - 2).html()).html());
-					var $page = parseInt($($thisChildren.filter('.active').html()).html());
+					var $active = $($thisChildren.filter('.active').html()).html();
+					var $page = parseInt($active);
 					var $drawMain = false;
 					switch ($(event.target).html().toLowerCase()) {
 					case 'first':
@@ -80,8 +81,8 @@
 							return true;
 						}
 					}
-					if($drawMain && $.isFunction(settings.callback)) {
-						settings.callback.call(this, {page : $page});
+					if($drawMain && $.isFunction(settings.callback) && ($(event.target).html() !== $active)) {
+						settings.callback.call(this, {size: settings.size, page : $page, limit: settings.limit});
 					}
 					if ($position >= 5 && $lastPositon < $totalPage) {
 						$parentTag.drawPage({
@@ -115,6 +116,8 @@
 			// first time initial page
             var $totalPage = Math.ceil(settings.size / settings.limit);
         	var $toFirstTime = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
+        	$(this).empty();
+        	$(this).append('<ul class="pagination"></ul>');
         	$(this).drawPage({
         		from: 1,
         		to: $toFirstTime,
