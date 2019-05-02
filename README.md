@@ -3,6 +3,8 @@ New and Simple Pagination Jquery Plugin for You.
 <div>
 <img src="https://github.com/jounger/pagination-jquery-plugin/blob/master/preview.PNG" />
 
+<h2>How to use?</h2>
+
 ```
 	$('#page').Pagination({ // id to initial draw and use pagination
             size: 87, // total size of list input (required)
