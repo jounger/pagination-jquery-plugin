@@ -23,7 +23,6 @@
             pageShow: 5,
             page: 1,
             limit: 1,
-            callback: function() {},
         }, options );
         return this.each(function(){
         	var $parentTag = $(this);
@@ -81,24 +80,24 @@
 							return true;
 						}
 					}
-					if($drawMain && $.isFunction(settings.callback) && ($(event.target).html() !== $active)) {
-						settings.callback.call(this, {size: settings.size, page : $page, limit: settings.limit});
+					if($drawMain && $.isFunction(callback) && ($(event.target).html() !== $active)) {
+						callback.call(this, {size: settings.size, page : $page, limit: settings.limit});
 					}
-					if ($position >= 5 && $lastPositon < $totalPage) {
+					if ($position >= settings.pageShow && $lastPositon < $totalPage) {
 						$parentTag.drawPage({
-							from: $lastPositon - 3,
+							from: $lastPositon - (settings.pageShow - 2),
 							to: $lastPositon + 1,
 						});
-						$position = 4;
+						$position = settings.pageShow - 1;
 					}
 					if ($position <= 1 && $firstPositon > 1) {
 						$parentTag.drawPage({
 							from: $firstPositon - 1,
-							to: $firstPositon + 3,
+							to: $firstPositon + (settings.pageShow - 2),
 						});
 						$position = 2;
 					}
-					if($position > 0 && $position < ($totalPage>5?6:$totalPage+1) && $totalPage > 1) {
+					if($position > 0 && $position < ($totalPage>settings.pageShow?(settings.pageShow+1):$totalPage+1) && $totalPage > 1) {
 						$parentTag.find('ul > li').eq($position).addClass('active').siblings().removeClass('active');
 					}	
 			});
@@ -111,7 +110,7 @@
             page: 1,
             limit: 1,
         }, options );
- 
+		if(settings.pageShow < 3) settings.pageShow = 3;
         return this.each( function() {
 			// first time initial page
             var $totalPage = Math.ceil(settings.size / settings.limit);
@@ -129,8 +128,7 @@
 	            pageShow: settings.pageShow,
 	            page: settings.page,
 	            limit: settings.limit,
-        		callback: callback,
-        	});
+        	}, callback);
         });
  
     };
