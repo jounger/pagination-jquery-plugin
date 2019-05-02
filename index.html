@@ -26,9 +26,14 @@
         <h1>Pagination Plugin</h1>
         <p>Anything you need. It's here!</p>
         <div class="demo">
-            <div id="page">
+            <div id="page1">
             </div>
-            <label id="info">Page information will be displayed here.</label>
+            <label id="info1">Page information will be displayed here.</label>
+        </div>
+        <div class="demo">
+            <div id="page2">
+            </div>
+            <label id="info2">Page information will be displayed here.</label>
         </div>
     </div>
 </div>
@@ -39,14 +44,24 @@
 <script type="text/javascript">
 $(function() {
 	console.log( "ready!" );
-	$('#page').Pagination({
-            size: 87,
-            pageShow: 5,
-            page: 1,
-            limit: 10,
-    	}, function(obj){
-            	$('#info').html('Current page: ' + obj.page);
-    	});
+    $('#page1').Pagination({
+        size: 108,
+        pageShow: 4,
+        page: 1,
+        limit: 10,
+        boundary: false,
+    }, function(obj){
+            $('#info1').html('Current page: ' + obj.page);
+    });
+    $('#page2').Pagination({
+        size: 108,
+        pageShow: 7,
+        page: 1,
+        limit: 10,
+        boundary: true,
+    }, function(obj){
+            $('#info2').html('Current page: ' + obj.page);
+    });
 });
 
 </script>
