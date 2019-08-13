@@ -1,18 +1,18 @@
 (function ( $ ) {
  	$.fn.drawPage = function( options ) {
- 		var settings = $.extend({
+		let settings = $.extend({
             from: 1,
 			to: 1,
 			boundary: false,
         }, options );
         return this.each(function(){
-        	var $this = $(this).children('ul');
+        	let $this = $(this).children('ul');
 	        $this.empty();
-	        var $preTag = '<li class="page-item"><a class="page-link" href="javascript:void(0)" tabindex="-1"';
-			var $endTag = '</a></li>';
+	        let $preTag = '<li class="page-item"><a class="page-link" href="javascript:void(0)" tabindex="-1"';
+			let $endTag = '</a></li>';
 			if(settings.boundary == true) $this.append($preTag + 'id="page-first" data-index="0">First' + $endTag);
 			$this.append($preTag + 'id="page-previous" data-index="0">Previous' + $endTag);
-			var $index = 0;
+			let $index = 0;
 			for (var i = settings.from; i <= settings.to; i++) {
 				$this.append($preTag + 'data-index="'+(++$index)+'">'+ i + $endTag);
 			}
@@ -21,28 +21,28 @@
         });
  	}
 	 $.fn.pageChanging = function( options, callback ) {
- 		var settings = $.extend({
+ 		let settings = $.extend({
             size: 1,
             pageShow: 5,
             page: 1,
-			limit: 1,
+			limit: 10,
 			boundary: false,
         }, options );
         return this.each(function(){
-			var $parentTag = $(this);
+			let $parentTag = $(this);
         	$(this).children('ul').click(
 				function(event) {
-					var $isBoundary = settings.boundary===true?1:0;
-					var $thisChildren = $(this).children('li');
-					var $position = $(event.target).attr('data-index');
-					var $totalPage = Math.ceil(settings.size / settings.limit);
-					var $index = parseInt($($thisChildren.filter('.active').html()).attr('data-index'));
-					var $firstPositon = parseInt($($thisChildren.eq(1 + $isBoundary).html()).html());
-					var $lastPositon = parseInt($($thisChildren.eq($thisChildren.length - (2 + $isBoundary)).html()).html());
-					var $active = $($thisChildren.filter('.active').html()).html();
-					var $page = isNaN($active)?1:parseInt($active);
-					var $drawMain = false;
-					var $currentPage = $(event.target).html().toLowerCase();
+					let $isBoundary = settings.boundary===true?1:0;
+					let $thisChildren = $(this).children('li');
+					let $position = $(event.target).attr('data-index');
+					let $totalPage = Math.ceil(settings.size / settings.limit);
+					let $index = parseInt($($thisChildren.filter('.active').html()).attr('data-index'));
+					let $firstPositon = parseInt($($thisChildren.eq(1 + $isBoundary).html()).html());
+					let $lastPositon = parseInt($($thisChildren.eq($thisChildren.length - (2 + $isBoundary)).html()).html());
+					let $active = $($thisChildren.filter('.active').html()).html();
+					let $page = isNaN($active)?1:parseInt($active);
+					let $drawMain = false;
+					let $currentPage = $(event.target).html().toLowerCase();
 					switch ($currentPage) {
 					case 'first':
 						if ($page > 1) {
@@ -88,7 +88,7 @@
 							return true;
 						}
 					}
-					var _from = 1, _to = settings.pageShow;
+					let _from = 1, _to = settings.pageShow;
 					if($currentPage === 'first') {
 						_from = 1;
 						_to = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
@@ -122,7 +122,7 @@
         });
  	}
     $.fn.Pagination = function( options, callback ) {
-        var settings = $.extend({
+        let settings = $.extend({
             size: 1,
             pageShow: 5,
             page: 1,
@@ -132,8 +132,8 @@
 		if(settings.pageShow < 3) settings.pageShow = 3;
         return this.each( function() {
 			// first time initial page
-            var $totalPage = Math.ceil(settings.size / settings.limit);
-        	var $toFirstTime = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
+            let $totalPage = Math.ceil(settings.size / settings.limit);
+        	let $toFirstTime = $totalPage>settings.pageShow?settings.pageShow:$totalPage;
         	$(this).empty();
         	$(this).append('<ul class="pagination"></ul>');
         	$(this).drawPage({
@@ -142,7 +142,7 @@
 				boundary: settings.boundary,
         	});
 			$(this).find('ul > li').eq(settings.boundary===true?2:1).addClass('active');
-			callback.call(this, {page : 1});
+			callback.call(this, {page : settings.page, limit: settings.limit});
             $(this).pageChanging({
 	            size: settings.size,
 	            pageShow: settings.pageShow,
